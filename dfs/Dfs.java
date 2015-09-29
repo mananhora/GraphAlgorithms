@@ -2,6 +2,21 @@ import java.util.ArrayList;
 public class Dfs {
 
 	static int clock = 0;
+
+	public static void dfs(Graph g) {
+		computeVerticesList(g);//computes the list of vertices of graph g
+
+		for (Vertex u : g.verticesList) { //computes the neighbours for each vertex
+			computeNeighbours(u, g);
+		}
+		depthFirstSearch(g);
+
+		for (Vertex v : g.verticesList) {
+			System.out.println(v.number + " -post  " + v.post);
+			System.out.println(v.number + " -pre " + v.pre);
+		}
+	}
+
 	//Subroutine- explore
 	public static void explore(Vertex s) {
 		s.pre = clock;
@@ -55,20 +70,7 @@ public class Dfs {
 	}
 
 
-	//helper method
-	public static void dfs(Graph g) {
-		computeVerticesList(g);
 
-		for (Vertex u : g.verticesList) {
-			computeNeighbours(u, g);
-		}
-		depthFirstSearch(g);
-		for (Vertex v : g.verticesList) {
-			System.out.println(v.number + " -post  " + v.post);
-			System.out.println(v.number + " -pre " + v.pre);
-
-		}
-	}
 }
 
 
