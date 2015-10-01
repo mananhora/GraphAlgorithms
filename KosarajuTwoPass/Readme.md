@@ -15,6 +15,7 @@ The Basic Idea:
 	We compute a 'magical ordering' of the vertices, and traverse the graph in that order to discover the SCCs one by one. This ordering is such that in one DFS, you can only explore vertices of a particular SCC and not reach any vertex of another SCC.
 
 		Computing The 'Magical Ordering':
+		
 		We create another graph, gRev, which is same as the original graph g, except with all the edges reversed. And then we run DFS-Loop (described below) on gRev, this gives us ordering in which we then traverse g to get the SCCs.
 
 		DFS-Loop

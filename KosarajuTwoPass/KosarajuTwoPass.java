@@ -12,6 +12,36 @@ public class KosarajuTwoPass {
 	static ArrayList<Vertex> leaders = new ArrayList<Vertex>();//list to keep track of leaders
 	static Graph gRev = null;
 
+
+	public static ArrayList<Scc> computeScc(Graph g) {
+		System.out.println("start computeScc");
+		dfsLoop1(gRev);//reorder the verticeslist to the order in which they are to be explored
+		g.verticesList = gRev.verticesList;//set order of vertices of g to order of vertices of gRev..
+
+		//mark all vertices of g as not explored:
+		for (int i = 0; i < g.verticesList.size(); i++) {
+			g.verticesList.get(i).explored = false;
+		}
+
+		dfsLoop2(g);
+		ArrayList<Scc> listofScc = new ArrayList<Scc>();
+
+		for (int i = 0; i < leaders.size(); i++ ) {
+			ArrayList<Vertex> sameLeader = new ArrayList<Vertex>();
+
+			for (int j = 0; j < g.verticesList.size(); j++) {
+				if (g.verticesList.get(j).leader == leaders.get(i)) {
+					sameLeader.add(g.verticesList.get(j));
+				}
+			}
+			Scc scc = new Scc(sameLeader);
+			listofScc.add(scc);
+		}
+		System.out.println("end computeScc");
+		return listofScc;
+	}
+
+
 	//DFS
 	//dfS subroutine for gRev
 	public static void dfS1(Graph g, Vertex i) {
@@ -76,33 +106,7 @@ public class KosarajuTwoPass {
 	}
 
 
-	public static ArrayList<Scc> computeScc(Graph g) {
-		System.out.println("start computeScc");
-		dfsLoop1(gRev);//reorder the verticeslist to the order in which they are to be explored
-		g.verticesList = gRev.verticesList;//set order of vertices of g to order of vertices of gRev..
 
-		//mark all vertices of g as not explored:
-		for (int i = 0; i < g.verticesList.size(); i++) {
-			g.verticesList.get(i).explored = false;
-		}
-
-		dfsLoop2(g);
-		ArrayList<Scc> listofScc = new ArrayList<Scc>();
-
-		for (int i = 0; i < leaders.size(); i++ ) {
-			ArrayList<Vertex> sameLeader = new ArrayList<Vertex>();
-
-			for (int j = 0; j < g.verticesList.size(); j++) {
-				if (g.verticesList.get(j).leader == leaders.get(i)) {
-					sameLeader.add(g.verticesList.get(j));
-				}
-			}
-			Scc scc = new Scc(sameLeader);
-			listofScc.add(scc);
-		}
-		System.out.println("end computeScc");
-		return listofScc;
-	}
 
 
 	//check if vertex with name == vname exists in list
