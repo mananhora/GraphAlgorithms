@@ -1,13 +1,19 @@
+import java.util.ArrayList;
+
 public class Vertex {
 	int v;
 	String name;
 	boolean explored;
 	Vertex leader;
-	int finishingtime;
+	int post;
+	ArrayList<Vertex> neighbours = new ArrayList<Vertex>();
 
-	public Vertex(int v, String name, boolean explored) {
+	public void setNeighbours(ArrayList<Vertex> neighbours) {
+		this.neighbours = neighbours;
+	}
+
+	public Vertex(int v, String name) {
 		this.name = name;
 		this.v = v;
-		this.explored = explored;
 	}
 }

@@ -1,7 +1,10 @@
 public class Edge {
-	public Vertex v, w;
-	public Edge(Vertex v, Vertex w) {
-		this.v = v;
-		this.w = w;
+	Vertex firstVertex;
+	Vertex secondVertex;
+
+	public Edge(Vertex firstVertex, Vertex secondVertex ) {
+		this.firstVertex = firstVertex;
+		this.secondVertex = secondVertex;
 	}
+
 }
